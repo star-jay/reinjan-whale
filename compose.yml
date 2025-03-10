@@ -1,0 +1,37 @@
+services:
+ starwars-db:
+  image: postgres:17
+  container_name: reinjan-starwars-db
+  environment:
+    POSTGRES_DB: ${DATABASE_NAME}
+    POSTGRES_USER: ${DATABASE_USERNAME}
+    POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+  ports:
+    - "55432:5432"
+  volumes:
+    - postgres_data:/var/lib/postgresql/data
+  env_file:
+    - .env
+
+ starwars-web:
+   build: .
+   container_name: reinjan-starwars-web
+   ports:
+     - "8000:8000"
+   depends_on:
+     - starwars-db
+   environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DEBUG: False
+      DJANGO_LOGLEVEL: "INFO"
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_URL: postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@starwars-db:5432/${DATABASE_NAME}
+      # DATABASE_URL: ${DATABASE_URL}
+      # DATABASE_ENGINE: ${DATABASE_ENGINE}
+
+   env_file:
+     - .env
+volumes:
+   postgres_data:
