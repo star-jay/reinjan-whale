@@ -1,0 +1,1140 @@
+{
+	"info": {
+		"_postman_id": "2bb23c29-5784-4b31-85ff-6f4e45aad900",
+		"name": "Starwars API - Reinjan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43028537"
+	},
+	"item": [
+		{
+			"name": "No Auth Provided",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/characters/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"characters",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth Provided",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/characters/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"characters",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Characters Luke",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There is only one Luke\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.count).to.eql(1);",
+							"});",
+							"pm.test(\"Get id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.globals.set('luke_id', jsonData.results[0].id)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/characters/?name=Luke",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"characters",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Luke"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Characters C3PO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There is only one C-3PO\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.count).to.eql(1);",
+							"});",
+							"pm.test(\"Get id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.globals.set('c3po_id', jsonData.results[0].id)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/characters/?creator=anakin",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"characters",
+						""
+					],
+					"query": [
+						{
+							"key": "creator",
+							"value": "anakin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Character Yoda",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There is only one Yoda\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.count).to.eql(1);",
+							"});",
+							"pm.test(\"Get id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.globals.set('yoda_id', jsonData.results[0].id)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/characters/?affiliation_name=Jedi High Council&died_location=dagobah",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"characters",
+						""
+					],
+					"query": [
+						{
+							"key": "affiliation_name",
+							"value": "Jedi High Council"
+						},
+						{
+							"key": "died_location",
+							"value": "dagobah"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Character Han",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There is only one Han Solo\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.count).to.eql(1);",
+							"});",
+							"pm.test(\"Get id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.globals.set('han_id', jsonData.results[0].id)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/characters/?born_location=corellia",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"characters",
+						""
+					],
+					"query": [
+						{
+							"key": "born_location",
+							"value": "corellia"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Character Checbacca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There is only one Chewbacca\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.count).to.eql(1);",
+							"});",
+							"pm.test(\"Get id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.globals.set('wookie_id', jsonData.results[0].id)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/characters/?species=wookie&affiliation_name=bright tree tribe",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"characters",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Chewbacca",
+							"disabled": true
+						},
+						{
+							"key": "species",
+							"value": "wookie"
+						},
+						{
+							"key": "affiliation_name",
+							"value": "bright tree tribe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Character Leia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There is only one Leia\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.count).to.eql(1);",
+							"});",
+							"pm.test(\"Get id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.globals.set('leila_id', jsonData.results[0].id)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/characters/?name=Leia",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"characters",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Leia"
+						},
+						{
+							"key": "species",
+							"value": "wookie",
+							"disabled": true
+						},
+						{
+							"key": "affiliation_name",
+							"value": "bright tree tribe",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Character Darth Maul",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There is only one Maul\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.count).to.eql(1);",
+							"});",
+							"pm.test(\"Get id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.globals.set('maul_id', jsonData.results[0].id)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/characters/?name=maul",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"characters",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "maul"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Team",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Get team id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.globals.set(\"team_id\", jsonData.id)",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "StarSquad",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/teams/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"teams",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Team Luke",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{luke_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/team-memberships/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"team-memberships",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Team C3PO",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{c3po_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/team-memberships/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"team-memberships",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Team Yoda",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{yoda_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/team-memberships/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"team-memberships",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Team Han",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{han_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/team-memberships/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"team-memberships",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Team Maul",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{maul_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/team-memberships/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"team-memberships",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST TeamMember Leila",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{leila_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/team-memberships/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"team-memberships",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST TeamMember Chewbacca",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{wookie_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/team-memberships/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"team-memberships",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Team Members",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"there are 5 team members\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{wookie_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/teams/{{team_id}}/members/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"teams",
+						"{{team_id}}",
+						"members",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE TeamMember Leia",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{wookie_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/teams/{{team_id}}/members/{{leila_id}}/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"teams",
+						"{{team_id}}",
+						"members",
+						"{{leila_id}}",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST TeamMember Chewbacca",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"team_id\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "team_id",
+							"value": "{{team_id}}",
+							"type": "text"
+						},
+						{
+							"key": "character_id",
+							"value": "{{wookie_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/team-memberships/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"team-memberships",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "Token {{token}}",
+				"type": "string"
+			}
+		]
+	}
+}
